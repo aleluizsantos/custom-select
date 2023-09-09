@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="styles.css" media="screen" />
+    <title>Select Customizaddo HTML | CSS | JS</title>
+</head>
+<body>
+    <div class="select">
+       <h2>🚀 Select Customizaddo HTML | CSS | JS</h2>
+
+        <div id="category-select">
+            <label for="options-view-button">Tecnologia</label>
+            <input type="checkbox" id="options-view-button" />
+
+            <div id="select-button">
+                <div id="selected-value">Selecione a categoria</div>
+
+                <div id="chevrons">
+                    <i data-lucide="chevron-down"></i>
+                    <i data-lucide="chevron-up"></i>
+                </div>
+            </div>
+        </div>
+
+        <ul id="options">
+            <li class="option">
+                <input type="radio" 
+                    name="category" 
+                    value="web" 
+                    data-label="ReactJs">
+                <i data-lucide="atom"></i>
+                <span class="label">ReactJs</span>
+                <i data-lucide="check"></i>
+            </li>
+            <li class="option">
+                <input type="radio" 
+                    name="category" 
+                    value="mobile" 
+                    data-label="React Native">
+                <i data-lucide="smartphone"></i>
+                <span class="label">React Native</span>
+                <i data-lucide="check"></i>
+            </li>
+            <li class="option">
+                <input type="radio" 
+                    name="category" 
+                    value="next" 
+                    data-label="Nextjs">
+                <i data-lucide="circle-dot-dashed"></i>
+                <span class="label">Nextjs</span>
+                <i data-lucide="check"></i>
+            </li>
+            <li class="option">
+                <input type="radio" 
+                    name="category" 
+                    value="html" 
+                    data-label="HTML 5">
+                <i data-lucide="code-2"></i>
+                <span class="label">HTML 5</span>
+                <i data-lucide="check"></i>
+            </li>
+            <li class="option">
+                <input type="radio" 
+                    name="category" 
+                    value="css" 
+                    data-label="CSS">
+                <i data-lucide="chevrons-right-left"></i>
+                <span class="label">CSS</span>
+                <i data-lucide="check"></i>
+            </li>
+        </ul>
+   </div>
+</body>
+
+<script src="https://unpkg.com/lucide@latest"></script>
+<script>lucide.createIcons();</script>
+<script>
+    let select = document.querySelector(".select"),
+    selectedValue = document.getElementById("selected-value"),
+    optionsViewButton = document.getElementById("options-view-button"),
+    inputsOptions = document.querySelectorAll(".option input");
+
+    inputsOptions.forEach(input => {
+        input.addEventListener("click", event => {
+            selectedValue.textContent = input.dataset.label
+            // Quando clicar ou tocar na seleção fechar a caixa
+            const isMouseOrTouch = 
+                event.pointerType === "mouse" || 
+                event.pointerType === "touch";
+
+                isMouseOrTouch && optionsViewButton.click()
+        })
+    })
+
+    window.addEventListener("keydown", e => {
+        if(!select.classList.contains("open")) return;
+
+        if(e.key === "Escape" || e.key === " " || e.key === "Enter") {
+            optionsViewButton.click()
+        }
+    });
+
+    optionsViewButton.addEventListener("input", ()=>{
+        select.classList.toggle("open");
+
+        if(!select.classList.contains("open")) return;
+
+        const input = 
+            document.querySelector(".option input:checked") ||
+            document.querySelector(".option input");
+
+        input.focus()
+    })
+
+</script>
+</html>
